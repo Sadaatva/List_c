@@ -39,6 +39,87 @@ class List {
         return *this;
     }
 
+    void PopBack(){
+        if (elementsCount == 0){
+            std::cerr << "Empty list" << "\n"; 
+        }
+
+        if (elementsCount == 1){
+            delete last;
+            last = first = nullptr;
+        } else {
+            Node* elem = last -> prev;
+            delete last;
+            last = elem;
+            last -> next = nullptr;
+        }
+
+        elementsCount--;
+    }
+
+    void PopFront(){
+        if (elementsCount == 0){
+            std::cerr << "Empty list" << "\n";
+            return;
+        }
+
+        if (elementsCount == 1){
+            delete first;
+            first = last = nullptr;
+        } else{
+            Node* elem = first -> next;
+            delete first;
+            first = elem;
+            first -> prev = nullptr;
+        }
+
+        elementsCount--;
+    }
+
+    void Clear(){
+        while (first != nullptr){
+            Node* elem = first;
+            first = first -> next;
+            delete elem;
+        }
+
+        last = nullptr;
+        elementsCount = 0;
+    }
+
+    void PushBack(const T& elem){
+        Node* node = new Node(elem, last, nullptr);
+
+        if (last != nullptr){
+            last -> next = node;
+        } else {
+            first = node;
+        }
+        last = node;
+        ++elementsCount;
+    }
+
+    
+    const T& Front() const{
+        if (first != nullptr){
+            return first -> element;
+        } else {
+        std::cerr << "Empty list" << "\n";
+        throw std::out_of_range("Empty List");
+        }
+    }
+
+    bool Empty()const{
+        return first == nullptr;
+    }
+
+    ~List(){
+        Clear();
+    }
+    
+    size_t Size()const{
+        return elementsCount;
+    }
 };
 
 int main(){
