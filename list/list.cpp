@@ -123,5 +123,26 @@ class List {
 };
 
 int main(){
+    List<int> MyList;
+    MyList.PushBack(3);
+    MyList.PushBack(3);
+    MyList.PushBack(4);
+
+    while (!MyList.Empty()){
+          std::cout << MyList.Front() << "\n";
+          MyList.PopFront();
+    }
     
+    std::cout << "PushBack(): " << MyList.Size() << "\n"; 
+
+    MyList.PopBack();
+    std::cout << "PopBack(): " << MyList.Size() << "\n";  
+
+    MyList.PopFront();
+    std::cout << "PopFront(): " << MyList.Size() << "\n";  
+    
+    MyList.Clear();
+    std::cout << "Clear(): " << MyList.Size() << "\n";  
+
+    return 0;
 }
